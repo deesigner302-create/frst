@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="frst protects the first hour of your day. Dump your tasks, get a calm, realistic plan, and do the work that actually matters before the noise arrives." />
+  <meta name="theme-color" content="#0d100f" />
+  <title>frst — make the first hour count</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- icon sprite -->
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5.5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2l2.2 6.1L20.5 10l-6.3 1.9L12 18l-2.2-6.1L3.5 10l6.3-1.9L12 2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.5l8 3v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10v-6l8-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12l2.4 2.4 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="7.5" y="12" width="3" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="8" width="3" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="18.5" y="14" width="2.5" height="3" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 10h17M8 3.5v4M16 3.5v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5M3 17l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2L5 13.5h6L10.5 22 19 10.5h-6L13.5 2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M9 6H5.5A2.5 2.5 0 003 8.5V12h6V6zm10 0h-3.5A2.5 2.5 0 0013 8.5V12h6V6zM3 12c0 4 1.2 6 4 6M13 12c0 4 1.2 6 4 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="frst home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-word">frst<span class="brand-dot">.</span></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Toggle theme">
+          <svg class="icon-sun" aria-hidden="true"><use href="#i-sun" /></svg>
+          <svg class="icon-moon" aria-hidden="true"><use href="#i-moon" /></svg>
+        </button>
+        <a class="btn btn-sm btn-primary header-cta" href="#demo">Get started <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        <button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon-menu" aria-hidden="true"><use href="#i-menu" /></svg>
+          <svg class="icon-close" aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#demo">Get started <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow reveal"><span class="pulse" aria-hidden="true"></span> The calm before the calendar</div>
+          <h1 id="hero-title" class="reveal">Make the <em>first hour</em> count.</h1>
+          <p class="hero-lede reveal">frst turns the mess in your head into one clear, realistic morning plan. Before the messages, before the meetings — you get to do the work that actually moves things.</p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-primary btn-lg" href="#demo">Plan my first day <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+            <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+          </div>
+          <p class="hero-note reveal"><svg aria-hidden="true"><use href="#i-check" /></svg> Free forever for one human. No card, no streak guilt.</p>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Preview of the frst daily plan">
+          <div class="window">
+            <div class="window-bar">
+              <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span class="window-title">Today</span>
+              <span class="window-date" id="today-label">Monday, Nov 2</span>
+            </div>
+            <div class="window-body">
+              <aside class="window-side">
+                <div class="side-label">Focus score</div>
+                <div class="ring" style="--pct: 78" aria-label="Focus score 78 percent"><span>78<small>%</small></span></div>
+                <div class="side-meta"><span class="dot-lime"></span> 2 of 3 blocks done</div>
+                <div class="side-divider"></div>
+                <div class="side-label">This week</div>
+                <div class="week-bars" aria-hidden="true">
+                  <i style="--h: 45%"></i><i style="--h: 70%"></i><i style="--h: 55%"></i><i class="is-today" style="--h: 88%"></i><i style="--h: 40%"></i><i style="--h: 0%"></i><i style="--h: 0%"></i>
+                </div>
+                <div class="side-days" aria-hidden="true"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+              </aside>
+              <div class="window-main">
+                <div class="main-head">
+                  <div>
+                    <p class="side-label">Your protected hour</p>
+                    <h2>Deep work, before the noise.</h2>
+                  </div>
+                  <span class="badge">08:00 — 09:00</span>
+                </div>
+                <ul class="timeline">
+                  <li class="is-done">
+                    <span class="time">08:00</span>
+                    <div class="task"><span class="task-check" aria-hidden="true"><svg><use href="#i-check" /></svg></span><div><strong>Write the proposal intro</strong><small>25 min · Deep work</small></div></div>
+                  </li>
+                  <li class="is-done">
+                    <span class="time">08:25</span>
+                    <div class="task"><span class="task-check" aria-hidden="true"><svg><use href="#i-check" /></svg></span><div><strong>Review the numbers</strong><small>15 min · Deep work</small></div></div>
+                  </li>
+                  <li class="is-active">
+                    <span class="time">08:40</span>
+                    <div class="task"><span class="task-check" aria-hidden="true"></span><div><strong>Send it to the team</strong><small>10 min · Admin</small></div></div>
+                  </li>
+                  <li>
+                    <span class="time">08:50</span>
+                    <div class="task task-break"><span class="task-check" aria-hidden="true"></span><div><strong>Step away from the screen</strong><small>10 min · Break</small></div></div>
+                  </li>
+                </ul>
+                <div class="window-foot"><svg aria-hidden="true"><use href="#i-spark" /></svg> Protected until 9:00. Notifications are paused.</div>
+              </div>
+            </div>
+          </div>
+          <div class="float-card" aria-hidden="true">
+            <span class="float-icon"><svg><use href="#i-bolt" /></svg></span>
+            <div><strong>+2.4 hrs</strong><small>of deep work this week</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee-section" aria-label="Used by thoughtful teams">
+      <div class="container">
+        <p class="marquee-label">Built for people who build things</p>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>Fieldnotes</span><span class="sep">✳</span><span>Northbound</span><span class="sep">✳</span><span>Studio Koto</span><span class="sep">✳</span><span>Margin</span><span class="sep">✳</span><span>Parallel</span><span class="sep">✳</span><span>Quiet Hours</span><span class="sep">✳</span>
+          <span>Fieldnotes</span><span class="sep">✳</span><span>Northbound</span><span class="sep">✳</span><span>Studio Koto</span><span class="sep">✳</span><span>Margin</span><span class="sep">✳</span><span>Parallel</span><span class="sep">✳</span><span>Quiet Hours</span><span class="sep">✳</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section problem" id="why" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">01 / The problem</p>
+          <h2 id="problem-title">Your day gets decided <em>for you.</em></h2>
+          <p>One "quick question" at 9:02 and the morning is gone. Most productivity tools add more lists. frst does the opposite: it protects a small, deliberate window and defends it.</p>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card reveal"><span class="stat-num">23<small>min</small></span><h3>Average recovery time</h3><p>The cost of a single interruption, before you find your place again.</p></article>
+          <article class="stat-card reveal"><span class="stat-num">60<small>%</small></span><h3>Of the day is reactive</h3><p>Slack, inbox, meetings. The important work gets whatever is left.</p></article>
+          <article class="stat-card reveal"><span class="stat-num">1<small>hr</small></span><h3>Is all it takes</h3><p>One uninterrupted hour, repeated, quietly compounds into real progress.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW -->
+    <section class="section how" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head section-head-split reveal">
+          <div>
+            <p class="kicker">02 / How it works</p>
+            <h2 id="how-title">From mental clutter to <em>one clear hour.</em></h2>
+          </div>
+          <p>Three steps, about sixty seconds. No setup ritual, no complicated system to maintain.</p>
+        </div>
+        <div class="steps">
+          <article class="step reveal">
+            <span class="step-num">01</span>
+            <div class="step-icon"><svg aria-hidden="true"><use href="#i-layers" /></svg></div>
+            <h3>Empty your head</h3>
+            <p>Type everything on your mind in plain language. frst sorts the urgent from the merely loud.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">02</span>
+            <div class="step-icon"><svg aria-hidden="true"><use href="#i-spark" /></svg></div>
+            <h3>Get a real plan</h3>
+            <p>A time-blocked morning with honest estimates, breaks, and one thing marked as the priority.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">03</span>
+            <div class="step-icon"><svg aria-hidden="true"><use href="#i-shield" /></svg></div>
+            <h3>Protect the hour</h3>
+            <p>Notifications pause, your status updates, and the rest of the day can wait its turn.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="section demo" id="demo" aria-labelledby="demo-title">
+      <div class="container">
+        <div class="demo-card">
+          <div class="demo-intro reveal">
+            <p class="kicker">03 / Try it</p>
+            <h2 id="demo-title">Build your <em>first day</em> right now.</h2>
+            <p>No signup. Drop in a few tasks and watch frst turn them into a calm, time-blocked morning. It runs entirely in your browser.</p>
+            <div class="demo-chips" role="group" aria-label="Example task sets">
+              <button type="button" class="chip" data-preset="Write the launch brief\nSketch three landing page ideas\nReply to client emails">Creative morning</button>
+              <button type="button" class="chip" data-preset="Fix the signup bug\nReview pull requests\nTeam standup\nUpdate the changelog">Engineering morning</button>
+              <button type="button" class="chip" data-preset="Draft monthly report\nCall with supplier\nPlan next week\nClear the inbox">Admin morning</button>
+            </div>
+          </div>
+
+          <div class="demo-workspace reveal">
+            <form id="planner-form" novalidate>
+              <label for="tasks">What's on your mind? <span>One task per line</span></label>
+              <textarea id="tasks" name="tasks" rows="6" spellcheck="true" placeholder="Write the launch brief&#10;Fix the signup bug&#10;Reply to client emails"></textarea>
+              <div class="form-row">
+                <button class="btn btn-primary" type="submit">Plan my morning <svg aria-hidden="true"><use href="#i-arrow" /></svg></button>
+                <button class="btn btn-ghost btn-sm" type="button" id="clear-tasks">Clear</button>
+              </div>
+              <p class="form-error" id="form-error" role="alert" hidden>Add at least one task first — even "figure out what to do" counts.</p>
+              <p class="form-hint"><svg aria-hidden="true"><use href="#i-shield" /></svg> Your tasks stay in this browser. Nothing is uploaded.</p>
+            </form>
+
+            <div class="plan-output" id="plan-output" aria-live="polite">
+              <div class="plan-empty" id="plan-empty">
+                <div class="plan-empty-icon"><svg aria-hidden="true"><use href="#i-calendar" /></svg></div>
+                <h3>Your morning will appear here</h3>
+                <p>Add a few tasks and hit plan. Try a preset if you're feeling uninspired.</p>
+              </div>
+              <div class="plan-result" id="plan-result" hidden>
+                <div class="plan-head">
+                  <div><p class="side-label">Your plan</p><h3>Your morning · from 08:00</h3></div>
+                  <span class="badge badge-solid" id="plan-summary">0 min</span>
+                </div>
+                <ol class="plan-list" id="plan-list"></ol>
+                <p class="plan-foot"><svg aria-hidden="true"><use href="#i-check" /></svg> Built with a 10-minute buffer after every two blocks. Adjust the times to fit your real life.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section features" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">04 / The details</p>
+          <h2 id="features-title">Small features, <em>big difference.</em></h2>
+          <p>Everything in frst exists to make starting easier. Nothing exists to make you feel behind.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card feature-wide reveal">
+            <div class="feature-wide-copy">
+              <div class="feature-icon"><svg aria-hidden="true"><use href="#i-spark" /></svg></div>
+              <h3>Honest estimates</h3>
+              <p>frst knows a "quick email" is never five minutes. It pads the plan so finishing feels possible instead of heroic.</p>
+            </div>
+            <div class="feature-visual" aria-hidden="true">
+              <div class="bar-row"><span>Monday</span><div class="bar"><i style="--w: 92%"></i></div><b>92%</b></div>
+              <div class="bar-row"><span>Tuesday</span><div class="bar"><i style="--w: 76%"></i></div><b>76%</b></div>
+              <div class="bar-row"><span>Wednesday</span><div class="bar"><i style="--w: 100%"></i></div><b>100%</b></div>
+              <div class="bar-row"><span>Thursday</span><div class="bar"><i style="--w: 84%"></i></div><b>84%</b></div>
+              <p class="feature-caption">Plan completion, last 4 days — without the guilt</p>
+            </div>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-shield" /></svg></div>
+            <h3>Focus shield</h3>
+            <p>One toggle mutes notifications and sets your status across the tools you already use.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-clock" /></svg></div>
+            <h3>Time, not todos</h3>
+            <p>Every task gets a slot on the clock. If it doesn't fit, frst tells you before your day does.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-chart" /></svg></div>
+            <h3>Quiet insights</h3>
+            <p>A weekly note on when you do your best work. No leaderboards, no streaks to break.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-bolt" /></svg></div>
+            <h3>Sixty-second start</h3>
+            <p>Open, type, go. No templates to configure and no methodology to learn first.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-calendar" /></svg></div>
+            <h3>Plays with your calendar</h3>
+            <p>Syncs with Google, Outlook and Apple calendars, then plans around what's already booked.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon"><svg aria-hidden="true"><use href="#i-arrow" /></svg></div>
+            <h3>Replan in one tap</h3>
+            <p>When the day changes, so does the plan. Move what's left to tomorrow without rebuilding anything.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section testimonials" aria-labelledby="quotes-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">05 / Word of mouth</p>
+          <h2 id="quotes-title">Quietly <em>recommended.</em></h2>
+        </div>
+        <div class="quote-grid">
+          <figure class="quote-card reveal">
+            <svg class="quote-icon" aria-hidden="true"><use href="#i-quote" /></svg>
+            <blockquote>I stopped waking up and immediately opening my inbox. That one change has done more for my work than any app I've tried.</blockquote>
+            <figcaption><span class="avatar" style="--a:#e8b4a0">MR</span><div><strong>Maya Reyes</strong><small>Product designer, Fieldnotes</small></div></figcaption>
+          </figure>
+          <figure class="quote-card reveal">
+            <svg class="quote-icon" aria-hidden="true"><use href="#i-quote" /></svg>
+            <blockquote>It's the first planner that doesn't make me feel bad when the day explodes. I just start again tomorrow.</blockquote>
+            <figcaption><span class="avatar" style="--a:#a8c8e8">JO</span><div><strong>Jonah Okafor</strong><small>Founder, Northbound</small></div></figcaption>
+          </figure>
+          <figure class="quote-card reveal">
+            <svg class="quote-icon" aria-hidden="true"><use href="#i-quote" /></svg>
+            <blockquote>Our team ships more and meets less. frst gave us a shared language for 'this can wait until ten'.</blockquote>
+            <figcaption><span class="avatar" style="--a:#d3c0e8">SL</span><div><strong>Sara Lind</strong><small>Engineering lead, Parallel</small></div></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head pricing-head reveal">
+          <div>
+            <p class="kicker">06 / Pricing</p>
+            <h2 id="pricing-title">Simple, <em>like the app.</em></h2>
+          </div>
+          <div class="billing-toggle" role="group" aria-label="Billing period">
+            <button type="button" class="is-active" data-billing="monthly" aria-pressed="true">Monthly</button>
+            <button type="button" data-billing="yearly" aria-pressed="false">Yearly <span>save 25%</span></button>
+          </div>
+        </div>
+        <div class="price-grid">
+          <article class="price-card reveal">
+            <h3>Solo</h3><p class="price-desc">For one person and one good hour.</p>
+            <div class="price"><span class="currency">$</span><span class="amount" data-monthly="0" data-yearly="0">0</span><span class="period">/ month</span></div>
+            <p class="price-sub">Free forever. No card required.</p>
+            <a class="btn btn-outline" href="#demo">Start free <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+            <ul class="price-list">
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> One daily plan</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Focus shield</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> 7-day history</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Calendar sync</li>
+            </ul>
+          </article>
+          <article class="price-card price-featured reveal">
+            <span class="price-flag">Most popular</span>
+            <h3>Pro</h3><p class="price-desc">For people with a lot on their mind.</p>
+            <div class="price"><span class="currency">$</span><span class="amount" data-monthly="8" data-yearly="6">8</span><span class="period">/ month</span></div>
+            <p class="price-sub" data-billing-note="monthly">Billed monthly. Cancel anytime.</p>
+            <a class="btn btn-primary" href="#demo">Try Pro free <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+            <ul class="price-list">
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Everything in Solo</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Unlimited plans &amp; replans</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Weekly quiet insights</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Integrations &amp; automations</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Offline mode</li>
+            </ul>
+          </article>
+          <article class="price-card reveal">
+            <h3>Team</h3><p class="price-desc">For teams protecting mornings together.</p>
+            <div class="price"><span class="currency">$</span><span class="amount" data-monthly="18" data-yearly="14">18</span><span class="period">/ seat / month</span></div>
+            <p class="price-sub">Everything in Pro, plus shared calm.</p>
+            <a class="btn btn-outline" href="#demo">Talk to us <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+            <ul class="price-list">
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Shared focus windows</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Team-wide quiet hours</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Admin &amp; billing controls</li>
+              <li><svg aria-hidden="true"><use href="#i-check" /></svg> Priority support</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-inner">
+        <div class="section-head reveal">
+          <p class="kicker">07 / Questions</p>
+          <h2 id="faq-title">A few things <em>worth asking.</em></h2>
+          <p>Still curious? Say hello at <a href="mailto:hello@frst.example">hello@frst.example</a> — a real person reads it.</p>
+        </div>
+        <div class="faq-list reveal">
+          <details open>
+            <summary>Is frst another todo list? <svg aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <div class="faq-answer">Not really. A todo list tells you what's possible; frst tells you what fits. Everything you add gets a place on the clock, and anything that doesn't fit is deliberately pushed to later instead of quietly haunting you.</div>
+          </details>
+          <details>
+            <summary>What if my morning blows up? <svg aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <div class="faq-answer">Then the day blew up — that happens. There are no broken streaks, no red badges and no "you're falling behind" emails. Hit replan after lunch and start from wherever you actually are.</div>
+          </details>
+          <details>
+            <summary>Which calendars does it work with? <svg aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <div class="faq-answer">Google Calendar, Outlook and Apple Calendar are supported today. frst only reads free/busy times and never moves your meetings without asking.</div>
+          </details>
+          <details>
+            <summary>Where does my data go? <svg aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <div class="faq-answer">Your tasks stay in your browser in this demo. In the full app they're encrypted in transit and at rest, never sold, and exportable as plain text whenever you want to leave.</div>
+          </details>
+          <details>
+            <summary>Can I cancel whenever? <svg aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <div class="faq-answer">Yes. One click, no retention flow, no "are you sure" maze. Annual plans are refunded pro-rata for unused months.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta-card reveal">
+          <div class="cta-grid-bg" aria-hidden="true"></div>
+          <p class="kicker">Tomorrow starts tonight</p>
+          <h2 id="cta-title">Give tomorrow a <em>better first hour.</em></h2>
+          <p>Join the weekly note: one small idea about doing calmer, better work. No noise, unsubscribe in a click.</p>
+          <form class="signup" id="signup-form" novalidate>
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@somewhere.com" required />
+            <button class="btn btn-primary" type="submit">Keep me posted <svg aria-hidden="true"><use href="#i-arrow" /></svg></button>
+          </form>
+          <p class="signup-msg" id="signup-msg" role="status" hidden></p>
+          <p class="cta-small">Or <a href="#demo">just make a plan</a> — no need to give us anything at all.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="frst home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="brand-word">frst<span class="brand-dot">.</span></span>
+        </a>
+        <p>A calmer start to the day.<br />Made for people who make things.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <div><h3>Product</h3><a href="#how">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#demo">Try the planner</a></div>
+        <div><h3>Company</h3><a href="#why">About the idea</a><a href="#quotes-title">Stories</a><a href="mailto:hello@frst.example">Contact</a></div>
+        <div><h3>Legal</h3><a href="#faq">Privacy</a><a href="#faq">Terms</a><a href="#faq">Security</a></div>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> frst. A concept site, built with care.</span>
+      <span>Made in the quiet hours · <a href="#top">Back to top ↑</a></span>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

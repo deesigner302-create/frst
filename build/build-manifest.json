@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "path": "_headers",
+      "bytes": 88
+    },
+    {
+      "path": "app.js",
+      "bytes": 10180
+    },
+    {
+      "path": "assets/favicon.svg",
+      "bytes": 328
+    },
+    {
+      "path": "index.html",
+      "bytes": 31279
+    },
+    {
+      "path": "styles.css",
+      "bytes": 34825
+    }
+  ]
+}

@@ -13,8 +13,27 @@ PORT=8080 node server.mjs
 No install step, no build step, no external network requests. `server.mjs` is a small Node static server that binds to `0.0.0.0` so it works in hosted preview environments. You can also open `index.html` directly or serve the folder with `python3 -m http.server`.
 
 ```bash
-npm run check      # verifies internal anchors, icon refs, assets and JS syntax
+npm run check      # verifies links, assets, JS syntax and deploy output freshness
 ```
+
+## Deploying
+
+Static hosts need a publish directory. `netlify.toml` configures this repo to run `npm run build` and publish `build/`:
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "build"
+```
+
+`npm run build` copies the browser-ready sources into `build/` (plus `_headers` and a small manifest). A fresh `build/` is **also committed to the repo**, so deploys succeed on hosts that skip the build command — the exact failure behind "Publish directory build does not exist".
+
+```bash
+npm run build                        # regenerate build/ after editing sources
+PORT=3001 npm run preview            # serve exactly what gets published
+```
+
+`npm run check` compares `build/` against the sources and fails if it's stale, so a forgotten rebuild won't ship old files. No dependencies are installed during a build.
 
 ## What's in it
 
@@ -32,8 +51,11 @@ npm run check      # verifies internal anchors, icon refs, assets and JS syntax
 | `index.html` | Markup and inline SVG icon sprite |
 | `styles.css` | Design system, layout, themes, responsive rules |
 | `app.js` | All interactivity (vanilla JS, no dependencies) |
-| `server.mjs` | Zero-dependency static file server |
-| `scripts/check.mjs` | Lightweight link/asset/syntax smoke test |
+| `server.mjs` | Zero-dependency static file server (`--dir=build` serves the output) |
+| `scripts/build.mjs` | Copies sources into `build/` for publishing |
+| `scripts/check.mjs` | Link/asset/syntax/build-freshness smoke test |
+| `netlify.toml` | Deploy command and publish directory |
+| `build/` | Committed deployable output (generated, don't edit by hand) |
 | `assets/favicon.svg` | Favicon |
 
 > This is a concept site. The product, companies, quotes and pricing are fictional, and forms don't send data anywhere.

@@ -1,10 +1,12 @@
 // Zero-dependency static server for local development / previews.
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
-import { extname, join, normalize, resolve, sep } from 'node:path';
+import { extname, join, normalize, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)));
+const dirArg = process.argv.find(arg => arg.startsWith('--dir='));
+const BASE = dirArg ? resolve(ROOT, dirArg.slice('--dir='.length)) : ROOT;
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
@@ -28,10 +30,10 @@ const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     const requested = decodeURIComponent(url.pathname);
-    let filePath = resolve(join(ROOT, normalize(requested === '/' ? '/index.html' : requested)));
+    let filePath = resolve(join(BASE, normalize(requested === '/' ? '/index.html' : requested)));
 
-    // Never serve anything outside the project directory.
-    if (filePath !== ROOT && !filePath.startsWith(ROOT + sep)) {
+    // Never serve anything outside the directory being served.
+    if (filePath !== BASE && !filePath.startsWith(BASE + sep)) {
       res.writeHead(403).end('Forbidden');
       return;
     }
@@ -44,7 +46,7 @@ const server = createServer(async (req, res) => {
     if (!info?.isFile()) {
       // Fallback to the homepage for extensionless routes.
       if (extname(filePath)) { res.writeHead(404).end('Not found'); return; }
-      filePath = join(ROOT, 'index.html');
+      filePath = join(BASE, 'index.html');
     }
 
     const body = await readFile(filePath);
@@ -59,5 +61,5 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`frst is running at http://${HOST}:${PORT}`);
+  console.log(`frst is running at http://${HOST}:${PORT} (serving ${relative(ROOT, BASE) || '.'})`);
 });

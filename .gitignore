@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+*.log
+dist/
+.venv/
+
+# build/ is intentionally committed: static hosts publish that directory,
+# and deploys should work even when no build command is run.

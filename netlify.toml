@@ -1,0 +1,11 @@
+# Netlify deploy settings. The site is plain HTML/CSS/JS, so the build step
+# just copies the sources into the publish directory (see scripts/build.mjs).
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# A committed build/ directory is also kept in the repo, so deploys still work
+# on hosts that skip the build command entirely.
